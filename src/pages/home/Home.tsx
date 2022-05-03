@@ -15,9 +15,10 @@ const Home: React.FC = () => {
                 marginTop: '4rem',
             }}>
                 <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gridGap: '2rem',
+                    display: 'flex',
+                    flexWrap: 'wrap-reverse',
+                    justifyContent: 'center',
+                    gap: '2rem',
                     margin: '2rem 3rem',
                 }}>
                     <div style={{
@@ -37,17 +38,21 @@ const Home: React.FC = () => {
                         className={'fade-up'}>Jared Gibson</h1>
                         <p className={'fade-up'}>Software Engineer</p>
                     </div>
-                    <img src={'/self_photo.jpg'}
-                    alt=""
-                    style={{
+                    <div style={{
                         height: '20rem',
                         width: '20rem',
-                        objectFit: 'cover',
-                        objectPosition: 'right',
                         borderLeft: 'rgb(255, 63, 63) 0.5rem solid',
-                        opacity: 1,
-                    }}
-                    className={'expand-out'}/>
+                    }}>
+                        <img src={'/self_photo.jpg'}
+                        alt=""
+                        style={{
+                            height: '20rem',
+                            width: '20rem',
+                            objectFit: 'cover',
+                            objectPosition: 'right',
+                        }}
+                        className={'expand-out'}/>
+                    </div>
                 </div>
             </PageTile>
             <PageTile
