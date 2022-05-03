@@ -37,7 +37,7 @@ const Home: React.FC = () => {
                         className={'fade-up'}>Jared Gibson</h1>
                         <p className={'fade-up'}>Software Engineer</p>
                     </div>
-                    <img src={'/self_photo.jpeg'}
+                    <img src={'/self_photo.jpg'}
                     alt=""
                     style={{
                         height: '20rem',
