@@ -17,6 +17,7 @@ const Painter: React.FC = () => {
     const [coordX, setCoordX] = useState(0);
     const [coordY, setCoordY] = useState(0);
     const [strokeColor, setStrokeColor] = useState('black');
+    const [msg, setMsg] = useState('');
 
     const canvasRef = createRef<HTMLCanvasElement>();
 
@@ -52,17 +53,14 @@ const Painter: React.FC = () => {
     }
 
     const startPaint = (event: MouseEvent<HTMLCanvasElement> | TouchEvent<HTMLCanvasElement>) => {
-        event.preventDefault();
-        event.nativeEvent.stopImmediatePropagation();
         setIsPainting(true);
         setPosition(event);
+        setMsg('started');
     }
 
     const registerPaint = (event: MouseEvent<HTMLCanvasElement> | TouchEvent<HTMLCanvasElement>) => {
         if (!isPainting) { return; }
         if (!ctx) { return; }
-        event.preventDefault();
-        event.nativeEvent.stopImmediatePropagation();
 
         ctx.beginPath();
         ctx.lineWidth = 5;
@@ -75,11 +73,13 @@ const Painter: React.FC = () => {
 
         ctx.lineTo(coordX, coordY);
         ctx.stroke();
+        setMsg('painted');
     }
 
     const stopPaint = () => {
         setIsPainting(false);
         ctx?.closePath();
+        setMsg('stopped');
     }
 
     return (
@@ -91,6 +91,7 @@ const Painter: React.FC = () => {
             alignItems: 'center',
             overflow: 'hidden',
         }}>
+            <h2>{msg}</h2>
             <div style={{
                 display: 'flex',
                 gap: '1rem',
