@@ -40,19 +40,19 @@ const Painter: React.FC = () => {
         if (!canvas) { return; }
         let x = 0;
         let y = 0;
-        if ('screenX' in event.nativeEvent) {
-            x = event.nativeEvent.clientX;
-            y = event.nativeEvent.clientY;
-        } else if ('touches' in event.nativeEvent) {
-            x = event.nativeEvent.touches[0].clientX;
-            y = event.nativeEvent.touches[0].clientY;
+        if ('screenX' in event) {
+            x = event.clientX;
+            y = event.clientY;
+        } else if ('touches' in event) {
+            x = event.touches[0].clientX;
+            y = event.touches[0].clientY;
         }
         setCoordX(x - (canvas.offsetLeft || 0));
         setCoordY(y - (canvas.offsetTop || 0));
     }
 
     const startPaint = (event: MouseEvent<HTMLCanvasElement> | TouchEvent<HTMLCanvasElement>) => {
-        event.nativeEvent.preventDefault();
+        event.preventDefault();
         event.nativeEvent.stopImmediatePropagation();
         setIsPainting(true);
         setPosition(event);
@@ -61,7 +61,7 @@ const Painter: React.FC = () => {
     const registerPaint = (event: MouseEvent<HTMLCanvasElement> | TouchEvent<HTMLCanvasElement>) => {
         if (!isPainting) { return; }
         if (!ctx) { return; }
-        event.nativeEvent.preventDefault();
+        event.preventDefault();
         event.nativeEvent.stopImmediatePropagation();
 
         ctx.beginPath();
