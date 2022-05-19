@@ -16,6 +16,7 @@ const Home: React.FC = () => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'stretch',
+              margin: '0 1rem',
             }}>
               <div style={{
                 display: 'flex',
