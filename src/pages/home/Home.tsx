@@ -1,10 +1,45 @@
-import { Fragment } from 'react';
+import MenuButton from '../../components/menu-button/MenuButton';
 import PageTile from '../../components/PageTile';
 import './Home.scss';
 
 const Home: React.FC = () => {
     return (
-        <Fragment>
+        <div style={{
+            maxWidth: '60rem',
+            alignSelf: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'stretch'
+          }}>
+            <div style={{
+              height: '4rem',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'stretch',
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}>
+                <span style={{
+                  fontWeight: 'bold',
+                  textTransform: 'lowercase',
+                  border: 'solid #eee 0.2rem',
+                  borderLeft: 'none',
+                  borderRight: 'none',
+                  padding: '0.2rem 1rem 0.3rem 1rem',
+                }}>jg</span>
+              </div>
+              <div style={{flexGrow: '1'}}></div>
+              <div style={{
+                // display: 'flex',
+                alignItems: 'center',
+                display: 'none' // remove when ready
+              }}>
+                <MenuButton></MenuButton>
+              </div>
+            </div>
+      
             <PageTile
             accentPosition={'top'}
             accentColor={'#1179ff'}    
@@ -12,7 +47,6 @@ const Home: React.FC = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'stretch',
-                marginTop: '4rem',
             }}>
                 <div style={{
                     display: 'flex',
@@ -70,7 +104,7 @@ const Home: React.FC = () => {
                 </p>
                 <h2>More coming soon...</h2>
             </PageTile>
-        </Fragment>
+        </div>
     )
 }
 
