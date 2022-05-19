@@ -21,13 +21,6 @@ const Painter: React.FC = () => {
     const canvasRef = createRef<HTMLCanvasElement>();
 
     useEffect(() => {
-        window.addEventListener('touchstart', (e) => startPaint(e), {passive: false});
-        window.addEventListener('touchmove', (e) => registerPaint(e), {passive: false});
-        window.addEventListener('touchend', stopPaint, {passive: false});
-        window.addEventListener('touchcancel', stopPaint, {passive: false});
-    })
-
-    useEffect(() => {
         setCtx(canvasRef.current?.getContext('2d'));
     }, [canvasRef]);
 
@@ -58,18 +51,18 @@ const Painter: React.FC = () => {
         setCoordY(y - (canvas.offsetTop || 0));
     }
 
-    const startPaint = (event: any) => {
+    const startPaint = (event: MouseEvent<HTMLCanvasElement> | TouchEvent<HTMLCanvasElement>) => {
         event.preventDefault();
-        event.stopImmediatePropagation();
+        event.nativeEvent.stopImmediatePropagation();
         setIsPainting(true);
         setPosition(event);
     }
 
-    const registerPaint = (event: any) => {
+    const registerPaint = (event: MouseEvent<HTMLCanvasElement> | TouchEvent<HTMLCanvasElement>) => {
         if (!isPainting) { return; }
         if (!ctx) { return; }
         event.preventDefault();
-        event.stopImmediatePropagation();
+        event.nativeEvent.stopImmediatePropagation();
 
         ctx.beginPath();
         ctx.lineWidth = 5;
@@ -96,6 +89,7 @@ const Painter: React.FC = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            overflow: 'hidden',
         }}>
             <div style={{
                 display: 'flex',
@@ -117,16 +111,17 @@ const Painter: React.FC = () => {
             </div>
             <canvas
                 ref={canvasRef}
-                // onMouseDown={(e) => startPaint(e)}
-                // onMouseMove={(e) => registerPaint(e)}
-                // onMouseUp={stopPaint}
-                // onTouchStart={(e) => startPaint(e)}
-                // onTouchMove={(e) => registerPaint(e)}
-                // onTouchEnd={stopPaint}
-                // onTouchCancel={stopPaint}
+                onMouseDown={(e) => startPaint(e)}
+                onMouseMove={(e) => registerPaint(e)}
+                onMouseUp={stopPaint}
+                onTouchStart={(e) => startPaint(e)}
+                onTouchMove={(e) => registerPaint(e)}
+                onTouchEnd={stopPaint}
+                onTouchCancel={stopPaint}
                 style={{
                     width: '100vw',
                     flexGrow: '1',
+                    touchAction: 'none',
                 }}
             ></canvas>
         </div>
